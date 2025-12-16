@@ -1,6 +1,6 @@
 ﻿namespace ExpandedTaskText.Models;
 
-public class EttConfig
+public record EttConfig
 {
     public bool DisplayAfterLore { get; set; }
 }

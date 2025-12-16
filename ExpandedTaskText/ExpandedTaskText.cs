@@ -101,7 +101,10 @@ public class ExpandedTaskText(
     private string BuildNewDescription(QuestInfo info, string originalDescription)
     {
         var sb = new StringBuilder();
-        if (_config == null) throw new NullReferenceException();
+        if (_config == null)
+        {
+            throw new NullReferenceException("[Expanded Task Text] Attempted to read config.json, got null! Ensure the file exists and is valid.");
+        }
         
         if (_config.DisplayAfterLore)
         {
