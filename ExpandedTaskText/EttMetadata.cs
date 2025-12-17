@@ -11,7 +11,7 @@ public record EttMetadata : AbstractModMetadata
     public override string Name { get; init; } = "Expanded Task Text";
     public override string Author { get; init; } = "Cj";
     public override List<string>? Contributors { get; init; }
-    public override Version Version { get; init; } = new("2.0.1");
+    public override Version Version { get; init; } = new("2.0.2");
     public override Range SptVersion { get; init; } = new("~4.0");
     public override List<string>? Incompatibilities { get; init; }
     public override Dictionary<string, Range>? ModDependencies { get; init; }
