@@ -26,6 +26,7 @@ public class ExpandedTaskText(
     private List<QuestInfo>? _questInfos;
     private Dictionary<MongoId, GunsmithInfo>? _gunsmithInfos;
     private EttConfig? _config;
+    private string? _desiredServerLocale;
 
     private Dictionary<MongoId, string> _questDescriptionCache = [];
     
@@ -34,6 +35,8 @@ public class ExpandedTaskText(
         var sw = Stopwatch.StartNew();
         var cachePath = Path.Combine(EttMetadata.ResourcesDirectory, "descriptionCache.json");
 
+        _desiredServerLocale = localeService.GetDesiredServerLocale();
+        
         if (File.Exists(cachePath))
         {
             var text = await File.ReadAllTextAsync(cachePath);
@@ -65,7 +68,7 @@ public class ExpandedTaskText(
 
     private Task UpdateAllTaskText()
     {
-        var locales = localeService.GetLocaleDb();
+        var locales = localeService.GetLocaleDb(_desiredServerLocale);
         foreach (var info in _questInfos ?? [])
         {
             if (!locales.TryGetValue($"{info.Id.ToString()} description", out var description))
@@ -279,7 +282,7 @@ public class ExpandedTaskText(
 
     private string GetLocale(string key)
     {
-        var locales = localeService.GetLocaleDb();
+        var locales = localeService.GetLocaleDb(_desiredServerLocale);
 
         if (!locales.TryGetValue(key, out var locale))
         {
