@@ -115,12 +115,12 @@ public class ExpandedTaskText(
         }
 
         sb.Append(info.KappaRequired
-            ? "This quest is required for Collector\n"
-            : "This quest is not required for Collector\n");
+            ? "此任务是 收藏家 的前置任务\n"
+            : "此任务不是 收藏家 的前置任务\n");
 
         sb.Append(info.LightkeeperRequired
-            ? "This quest is required for Lightkeeper\n"
-            : "This quest is not required for Lightkeeper\n");
+            ? "此任务是 Lightkeeper 的前置任务\n"
+            : "此任务不是 Lightkeeper 的前置任务\n");
 
         sb.Append(GetKeyInfoForQuest(info));
         sb.Append("\n\n");
@@ -172,7 +172,7 @@ public class ExpandedTaskText(
         
         var sb = new StringBuilder();
         
-        sb.Append(result.Count > 0 ? "Leads to:": "Leads to: Nothing");
+        sb.Append(result.Count > 0 ? "后续任务:": "无后续任务");
         sb.Append(string.Join(", ", result));
         
         return sb.ToString();
@@ -212,12 +212,12 @@ public class ExpandedTaskText(
 
         if (result.Count > 0)
         {
-            sb.Append("Requires Key(s):");
+            sb.Append("所需钥匙:");
             sb.Append(string.Join(", ", result));
         }
         else
         {
-            sb.Append("No keys required.");
+            sb.Append("无需钥匙");
         }
         
         return sb.ToString();
@@ -245,7 +245,7 @@ public class ExpandedTaskText(
         var traders = databaseService.GetTraders();
         
         var sb = new StringBuilder();
-        const string requiredDurability = "Required minimum gun durability: 60";
+        const string requiredDurability = "最低耐久度要求: 60";
         sb.Append(requiredDurability);
         
         foreach (var partId in info.RequiredParts)
@@ -271,7 +271,7 @@ public class ExpandedTaskText(
                     if (loyaltyLevelItems.TryGetValue(item.Id, out var loyaltyLevel))
                     {
                         var traderName = GetLocale($"{tid.ToString()} Nickname");
-                        sb.Append($"\n\tSold by {traderName} LL {loyaltyLevel}");
+                        sb.Append($"\n\t{traderName} 可购买 (LL{loyaltyLevel})");
                     }
                 }
             }
