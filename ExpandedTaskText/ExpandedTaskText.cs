@@ -35,7 +35,7 @@ public class ExpandedTaskText(
         var sw = Stopwatch.StartNew();
         var cachePath = Path.Combine(EttMetadata.ResourcesDirectory, "descriptionCache.json");
 
-        _desiredServerLocale = localeService.GetDesiredServerLocale();
+        _desiredServerLocale = ch;
         
         if (File.Exists(cachePath))
         {
